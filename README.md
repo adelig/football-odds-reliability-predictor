@@ -3,6 +3,8 @@
 ![alt text](https://img.shields.io/badge/Python-3.5-blue.svg)
 ![alt text](https://img.shields.io/versioneye/d/ruby/rails.svg) <br />
 
+[Notebook](odd_predictor_notebook.ipynb) | [Python code](odd_predictor.py) <br />
+
 Find out the most trustworthy football game out of all the scheduled English Premier League matches for tomorrow. <br />
 <br />
 Initially, fetch all the historical [betting odds data](http://football-data.co.uk/englandm.php) from season 2000/2001 onwards - every time the code executes it fetches the most updated data for the current season - and compute the average odds value (among all the available betting companies) for each particular match played for the three potential results Home/Draw/Away separately. <br />

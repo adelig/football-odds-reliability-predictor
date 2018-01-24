@@ -1,7 +1,6 @@
 # Football Odds - Reliability Predictor
 ![alt text](https://img.shields.io/badge/License-GPL%20v3-blue.svg)
-![alt text](https://img.shields.io/badge/Python-3.5-blue.svg)
-![alt text](https://img.shields.io/versioneye/d/ruby/rails.svg) <br />
+![alt text](https://img.shields.io/badge/Python-3.5-blue.svg) <br />
 
 [Notebook](odd_predictor_notebook.ipynb) | [Python code](odd_predictor.py) <br />
 

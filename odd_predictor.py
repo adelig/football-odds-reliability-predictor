@@ -197,7 +197,7 @@ if english_premier_league is not None:
         playing_stat_temp = playing_stat[(playing_stat.HomeTeam == hTeam) & 
                                          (playing_stat.AwayTeam == aTeam)]
         
-        if len(playing_stat_temp) != 0:
+        if len(playing_stat_temp) > 1:
             for odd_type in ['avgH', 'avgD', 'avgA']:
                 # Convert gradually all the odd categories into time series.
                 playing_stat_slice = playing_stat_temp[['Date',odd_type]].reset_index(drop=True)
@@ -217,22 +217,22 @@ if english_premier_league is not None:
         
         dist=[]
         
-        for team_no in range(0, up_matches.shape[0]):
+        for team in pred_odds.homeTeam.values:
             dist_dict={}
-            dist_dict['homeTeam'] = up_matches.homeTeam.values[0]
-            dist_dict['awayTeam'] = up_matches.awayTeam.values[0]
-            dist_dict['time'] = up_matches.time.values[0]
-            dist_dict['date'] = up_matches.date.values[0]
-            dist_dict['predH'] = pred_odds.avgH.values[0]
-            dist_dict['predD'] = pred_odds.avgD.values[0]
-            dist_dict['predA'] = pred_odds.avgA.values[0]
-            dist_dict['whH'] = up_matches.oddH.values[0]
-            dist_dict['whD'] = up_matches.oddD.values[0]
-            dist_dict['whA'] = up_matches.oddA.values[0]
+            dist_dict['homeTeam'] = team
+            dist_dict['awayTeam'] = pred_odds[pred_odds.homeTeam==team].awayTeam.values[0]
+            dist_dict['time'] = up_matches[up_matches.homeTeam==team].time.values[0]
+            dist_dict['date'] = up_matches[up_matches.homeTeam==team].date.values[0]
+            dist_dict['predH'] = round(float(pred_odds[pred_odds.homeTeam==team].avgH.values[0]), 2)
+            dist_dict['predD'] = round(float(pred_odds[pred_odds.homeTeam==team].avgD.values[0]), 2)
+            dist_dict['predA'] = round(float(pred_odds[pred_odds.homeTeam==team].avgA.values[0]), 2)
+            dist_dict['whH'] = up_matches[up_matches.homeTeam==team].oddH.values[0]
+            dist_dict['whD'] = up_matches[up_matches.homeTeam==team].oddD.values[0]
+            dist_dict['whA'] = up_matches[up_matches.homeTeam==team].oddA.values[0]
             
-            dist_dict['dist'] = float(abs(up_matches.oddH - pred_odds.avgH) +
-                                abs(up_matches.oddD - pred_odds.avgD) + 
-                                abs(up_matches.oddA - pred_odds.avgA))
+            dist_dict['dist'] = round(float(abs(dist_dict['whH'] - dist_dict['predH']) +
+                                abs(dist_dict['whD'] - dist_dict['predD']) + 
+                                abs(dist_dict['whA'] - dist_dict['predA'])), 2)
             
             dist.append(dist_dict)
             
